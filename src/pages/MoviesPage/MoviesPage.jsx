@@ -17,7 +17,7 @@ export default function MoviePage() {
             setIsLoading(true);
             setFilms({});
             const data = await fetchMovies("search/movie", search);
-            data.length > 0 ? setFilms(data) : notifyInfo();
+            data.results.length > 0 ? setFilms(data.results) : notifyInfo();
         } catch (e) {
             notifyErro();
         } finally {

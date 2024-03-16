@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react";
 import { fetchMovies } from "../../movie-api";
 import { FadeLoader } from "react-spinners";
-import MovieList from "../../components/MovieList/MovieList";
 import toast, { Toaster } from "react-hot-toast";
+
+import css from "./HomePage.module.css";
+
+import MovieList from "../../components/MovieList/MovieList";
 
 const notify = () => toast.error("Oops!Error!Reload!");
 
@@ -15,7 +18,7 @@ export default function HomePage() {
             try {
                 setIsLoading(true);
                 const data = await fetchMovies("trending/movie/day");
-                setMoives(data);
+                setMoives(data.results);
             } catch (e) {
                 notify();
             } finally {
@@ -27,7 +30,7 @@ export default function HomePage() {
 
     return (
         <>
-            <h1>Trending Movies</h1>
+            <h1 className={css.title}>Trending Movies</h1>
 
             {isLoading && <FadeLoader color="#3646d6" />}
             {movies.length > 0 && <MovieList movies={movies} />}

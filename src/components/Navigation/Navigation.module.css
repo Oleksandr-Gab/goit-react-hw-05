@@ -1,0 +1,26 @@
+.nav {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    font-size: 28px;
+    font-weight: 600;
+}
+
+.link {
+    text-decoration: none;
+    color: rgb(16, 17, 24);
+    border: 1px solid rgb(16, 17, 24);
+    padding: 2px 24px;
+    border-radius: 8px;
+}
+
+.linkWrap {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.active {
+    color: blueviolet;
+    border: 2px solid blueviolet;
+}

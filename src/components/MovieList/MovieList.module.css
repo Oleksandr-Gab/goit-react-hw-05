@@ -1,0 +1,12 @@
+.list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.item {
+    border: 1px solid rgb(66, 64, 64);
+    border-radius: 4px;
+    width: 300px;
+}
