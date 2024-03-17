@@ -1,0 +1,18 @@
+.wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.LoadMoreBtn {
+    padding: 8px;
+    background-color: transparent;
+    color: blueviolet;
+    border: 1px solid blueviolet;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.LoadMoreBtn:hover {
+    background-color: blueviolet;
+    color: white;
+}
