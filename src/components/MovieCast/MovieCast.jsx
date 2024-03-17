@@ -3,9 +3,9 @@ import { fetchMovies } from "../../movie-api";
 import { useParams } from "react-router-dom";
 
 import toast, { Toaster } from "react-hot-toast";
-import { FadeLoader } from "react-spinners";
 
 import css from "./MovieCast.module.css";
+import Loader from "../Loader/Loader";
 
 const notifyErro = () => toast.error("Oops!Error!Reload!");
 
@@ -21,7 +21,6 @@ export default function MovieReviews() {
                 setIsLoading(true);
                 const data = await fetchMovies(`movie/${movieId}/credits`);
                 setCast(data.cast);
-                console.log(data.cast);
             } catch (e) {
                 notifyErro();
             } finally {
@@ -35,7 +34,7 @@ export default function MovieReviews() {
 
     return (
         <>
-            {isLoading && <FadeLoader color="#3646d6" />}
+            {isLoading && <Loader />}
             {cast && (
                 <ul className={css.list}>
                     {cast.map(({ id, name, character, profile_path }) => (

@@ -1,18 +1,17 @@
-import { useEffect, useRef, useState } from "react";
+import { Suspense, useEffect, useRef, useState } from "react";
 import {
     Link,
     NavLink,
     Outlet,
     useLocation,
     useParams,
-    useSearchParams,
 } from "react-router-dom";
 
 import { fetchMovies } from "../../movie-api";
 
 import toast, { Toaster } from "react-hot-toast";
-import { FadeLoader } from "react-spinners";
 import MovieDetails from "../../components/MovieDetails/MovieDetails";
+import Loader from "../../components/Loader/Loader";
 
 const notifyErro = () => toast.error("Oops!Error!Reload!");
 
@@ -22,6 +21,7 @@ export default function MovieDetailsPage() {
 
     const { movieId } = useParams();
     const location = useLocation();
+    const backLinkRef = useRef(location.state ?? "/movies");
 
     useEffect(() => {
         async function getData() {
@@ -40,9 +40,9 @@ export default function MovieDetailsPage() {
 
     return (
         <div>
-            <Link to={location.state}>Go back</Link>
+            <Link to={backLinkRef.current}>Go back</Link>
             {film && <MovieDetails film={film} />}
-            {isLoading && <FadeLoader color="#3646d6" />}
+            {isLoading && <Loader />}
             <ul>
                 <li>
                     <NavLink to="cast">Cast</NavLink>
@@ -52,7 +52,9 @@ export default function MovieDetailsPage() {
                 </li>
             </ul>
             <hr />
-            <Outlet />
+            <Suspense fallback={<Loader />}>
+                <Outlet />
+            </Suspense>
             <Toaster />
         </div>
     );

@@ -6,6 +6,8 @@ import { fetchMovies } from "../../movie-api";
 import toast, { Toaster } from "react-hot-toast";
 import { useSearchParams } from "react-router-dom";
 
+import css from "./MoviesPage.module.css";
+
 const notifyInfo = () => toast.error("Nothing was found for your request!");
 const notifyErro = () => toast.error("Oops!Error!Reload!");
 
@@ -39,11 +41,11 @@ export default function MoviePage() {
     };
 
     return (
-        <>
+        <div className={css.wrapper}>
             <MovieSearchBar onSearch={handleSearch} />
-            {isLoading && <FadeLoader color="#3646d6" />}
             {films.length > 0 && <MovieList movies={films} />}
+            {isLoading && <FadeLoader color="#3646d6" />}
             <Toaster />
-        </>
+        </div>
     );
 }
