@@ -8,7 +8,7 @@ import { FadeLoader } from "react-spinners";
 const notifyErro = () => toast.error("Oops!Error!Reload!");
 
 export default function MovieReviews() {
-    const [reviews, setReviews] = useState(null);
+    const [reviews, setReviews] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
 
     const { movieId } = useParams();
@@ -31,7 +31,7 @@ export default function MovieReviews() {
     return (
         <>
             {isLoading && <FadeLoader color="#3646d6" />}
-            {reviews && (
+            {reviews.length > 0 && (
                 <ul>
                     {reviews.map(({ id, author, content }) => (
                         <li key={id}>
@@ -42,7 +42,9 @@ export default function MovieReviews() {
                     ))}
                 </ul>
             )}
-            {!reviews && <p>We dont have any reviews for this movie</p>}
+            {reviews.length == 0 && (
+                <p>We dont have any reviews for this movie</p>
+            )}
             <Toaster />
         </>
     );

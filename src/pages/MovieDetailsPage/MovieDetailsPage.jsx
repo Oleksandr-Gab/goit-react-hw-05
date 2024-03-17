@@ -5,6 +5,7 @@ import {
     Outlet,
     useLocation,
     useParams,
+    useSearchParams,
 } from "react-router-dom";
 
 import { fetchMovies } from "../../movie-api";
@@ -19,10 +20,9 @@ export default function MovieDetailsPage() {
     const [isLoading, setIsLoading] = useState(false);
     const [film, setFilm] = useState(null);
 
-    const location = useLocation();
-    const backLinkRef = useRef(location.state ?? "/movies");
-
     const { movieId } = useParams();
+    const location = useLocation();
+
     useEffect(() => {
         async function getData() {
             try {
@@ -39,8 +39,8 @@ export default function MovieDetailsPage() {
     }, [movieId]);
 
     return (
-        <>
-            <Link to={backLinkRef.current}>Go back</Link>
+        <div>
+            <Link to={location.state}>Go back</Link>
             {film && <MovieDetails film={film} />}
             {isLoading && <FadeLoader color="#3646d6" />}
             <ul>
@@ -54,6 +54,6 @@ export default function MovieDetailsPage() {
             <hr />
             <Outlet />
             <Toaster />
-        </>
+        </div>
     );
 }

@@ -5,6 +5,8 @@ import { useParams } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
 import { FadeLoader } from "react-spinners";
 
+import css from "./MovieCast.module.css";
+
 const notifyErro = () => toast.error("Oops!Error!Reload!");
 
 export default function MovieReviews() {
@@ -29,19 +31,28 @@ export default function MovieReviews() {
         getReview();
     }, [movieId]);
 
+    const defaultActor = `https://clipart-library.com/2023/img_533545.png`;
+
     return (
         <>
             {isLoading && <FadeLoader color="#3646d6" />}
             {cast && (
-                <ul>
+                <ul className={css.list}>
                     {cast.map(({ id, name, character, profile_path }) => (
-                        <li key={id}>
+                        <li key={id} className={css.item}>
                             <img
-                                src={`https://image.tmdb.org/t/p/w300/${profile_path}`}
+                                src={
+                                    profile_path !== null
+                                        ? `https://image.tmdb.org/t/p/w300/${profile_path}`
+                                        : defaultActor
+                                }
                                 alt={name}
+                                width="300"
                             />
-                            <p>{name}</p>
-                            <p> Character: {character}</p>
+                            <div>
+                                <p>{name}</p>
+                                <p> Character: {character}</p>
+                            </div>
                         </li>
                     ))}
                 </ul>

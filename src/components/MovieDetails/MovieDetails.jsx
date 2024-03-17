@@ -1,4 +1,4 @@
-// import { getPosterFilm } from "../../movie-api";
+import css from "./MovieDetails.module.css";
 
 export default function MovieDetails({
     film: { title, release_date, poster_path, overview, genres, vote_average },
@@ -6,14 +6,15 @@ export default function MovieDetails({
     const genderSting = genres.map((genre) => genre.name).join(" ");
     const year = release_date.slice(0, 4);
     const score = Math.round(vote_average * 10);
+    const defaultImg = `https://upload.wikimedia.org/wikipedia/commons/5/5f/P_Movie.svg`;
+    const Img = Boolean(poster_path)
+        ? `https://image.tmdb.org/t/p/w300/${poster_path}`
+        : defaultImg;
 
     return (
         <>
-            <div>
-                <img
-                    src={`https://image.tmdb.org/t/p/w500/${poster_path}`}
-                    alt={title}
-                />
+            <div className={css.wraper}>
+                <img src={Img} alt={title} />
                 <div>
                     <h2>
                         {title}({year})
