@@ -14,7 +14,7 @@ const notifyErro = () => toast.error("Oops!Error!Reload!");
 
 export default function MoviePage() {
     const [isLoading, setIsLoading] = useState(false);
-    const [films, setFilms] = useState({});
+    const [films, setFilms] = useState([]);
     const [loadBtn, setLoadBtn] = useState(false);
     const [params, setParams] = useSearchParams();
 

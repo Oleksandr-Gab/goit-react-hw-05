@@ -10,7 +10,7 @@ import Loader from "../../components/Loader/Loader";
 const notify = () => toast.error("Oops!Error!Reload!");
 
 export default function HomePage() {
-    const [movies, setMoives] = useState({});
+    const [movies, setMoives] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
